@@ -2,12 +2,14 @@ const express = require("express");
 const dotenv = require("dotenv");
 const bootcamp = require("./Routes/bootcamp")
 const connectDB = require("./config/db")
+
 dotenv.config({ path: "./config/config.env" })
 
 connectDB();
 
-
 const app = express();
+
+app.use(express.json())
 
 app.use("/api/v1/bootcamps", bootcamp);
 
@@ -21,4 +23,6 @@ process.on("unhandledRejection", (err, promise) => {
     // close the server
     server.close(() => process.exit(1));
 })
+
+
 
